@@ -27,5 +27,18 @@ class ZipCodeTest < Test::Unit::TestCase
   # Methods that begin with 'test_' are evaluated by Test/Unit as tests
   def test_initialize_hash
     assert_equal '00210', @zipcode.zip
+    assert_equal -5, @zipcode.timezone
+    assert_equal 43.005895, @zipcode.latitude
+  end
+  
+  def test_timezone_name
+    assert_equal 'US/Eastern', @zipcode.timezone_name
+  end
+  
+  def test_dst_question_mark
+    assert @zipcode.dst?
+
+    zip = ZipCode.new(:dst => '0')
+    assert_equal false, zip.dst?
   end
 end
