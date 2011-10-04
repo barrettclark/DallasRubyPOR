@@ -1,5 +1,6 @@
 require 'test/unit'
-require File.expand_path(File.dirname(__FILE__), 'example1')
+require 'test_helper'
+require 'example1'
 
 class Example1Test < Test::Unit::TestCase
   def test_initialize

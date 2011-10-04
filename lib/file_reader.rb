@@ -1,5 +1,5 @@
 require 'csv'
-require File.join(File.dirname(__FILE__), 'zipcode')
+require File.join(File.dirname(__FILE__), '../lib', 'zipcode')
 require 'pp'
 
 class FileReader

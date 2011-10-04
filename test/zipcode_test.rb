@@ -1,5 +1,6 @@
 require 'test/unit'
-require File.expand_path(File.dirname(__FILE__), 'zipcode')
+require 'test_helper'
+require 'zipcode'
 
 class ZipCodeTest < Test::Unit::TestCase
   # This runs before each test method
@@ -29,10 +30,12 @@ class ZipCodeTest < Test::Unit::TestCase
     assert_equal '00210', @zipcode.zip
     assert_equal -5, @zipcode.timezone
     assert_equal 43.005895, @zipcode.latitude
+    assert_in_delta(43.0059, @zipcode.latitude, 0.001)
   end
   
   def test_timezone_name
     assert_equal 'US/Eastern', @zipcode.timezone_name
+    assert_match(/east/i, @zipcode.timezone_name)
   end
   
   def test_dst_question_mark
@@ -40,5 +43,7 @@ class ZipCodeTest < Test::Unit::TestCase
 
     zip = ZipCode.new(:dst => '0')
     assert_equal false, zip.dst?
+    assert_nil zip.zip
+    assert_not_nil zip.latitude
   end
 end
