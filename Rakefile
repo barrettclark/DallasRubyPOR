@@ -1,6 +1,8 @@
 require 'rake'
 require 'rake/testtask'
 
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'test')
+
 Rake::TestTask.new do |t|
   t.libs << 'test'
   t.test_files = FileList['test/*test.rb']
