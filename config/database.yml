@@ -1,0 +1,13 @@
+development:
+  dbname: dallas_por_zipcode
+  user: barrettclark
+  password:
+  host: localhost
+  port: 5432
+
+test:
+  dbname: dallas_por_zipcode_test
+  user: barrettclark
+  password:
+  host: localhost
+  port: 5432

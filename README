@@ -3,3 +3,7 @@ Dallas Ruby Plain Old Ruby (POR) Talk
 Command-line app (script) that will read a zipcode file and do interesting stuff.
 
 Week 1: Test/Unit
+
+Week 2: Database interaction
+
+Week 3: Logger, Inputs, and Rake (?)

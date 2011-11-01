@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'test_helper'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'test_helper')
 require 'example1'
 
 class Example1Test < Test::Unit::TestCase
