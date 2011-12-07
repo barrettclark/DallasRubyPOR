@@ -25,6 +25,11 @@ class ZipCode < DBBase
     zipcode
   end
   
+  def self.delete_all
+    ZipCode.connection.exec('TRUNCATE TABLE zipcode')
+    logger.info 'Zipcode table truncated'
+  end
+  
   # We can also find records in the database and reconsititute them into
   # ZipCode objects.
   def self.find(zipcode)
@@ -47,11 +52,11 @@ class ZipCode < DBBase
     ]
     sql = "INSERT INTO zipcode VALUES (#{fields.join(',')})"
     result = ZipCode.connection.exec(sql)
-    puts "#{sql}\n  Tuples: #{result.cmd_tuples}" if ENV['SCRIPT_ENV'] == 'test'
+    logger.debug " Tuples: #{result.cmd_tuples}" if ENV['SCRIPT_ENV'] == 'test'
     # NOTE: insert queries do not return a result set
     result
   rescue PGError=>e
-    puts "#{e}: Unable to insert the zipcode: #{@zipcode}"
+    logger.error "#{e}: Unable to insert the zipcode: #{@zipcode}"
   end
   
   def timezone_name

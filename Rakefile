@@ -1,7 +1,15 @@
 require 'rake'
 require 'rake/testtask'
+require 'bundler/setup'
+Bundler.require
 
-$LOAD_PATH << File.join(File.dirname(__FILE__), 'test')
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
+require 'logging'
+include Logging
+require 'db_base'
+require 'zipcode'
+
+ENV['SCRIPT_ENV'] ||= 'development'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -22,7 +30,15 @@ namespace :log do
   desc "Clear log files"
   task :clear do
     dir = File.dirname(__FILE__)
-    logfiles = Dir.entries(dir + '/logs').select { |f| f =~ /log$/ }
-    logfiles.each { |f| File.truncate("#{dir}/logs/#{f}", 0) }
+    logfiles = Dir.entries(dir + '/log').select { |f| f =~ /log$/ }
+    logfiles.each { |f| File.truncate("#{dir}/log/#{f}", 0) }
+  end
+end
+
+namespace :db do
+  desc "Truncate the zipcode table"
+  task :truncate do
+    logger.debug 'Truncate called from rake'
+    ZipCode.delete_all
   end
 end

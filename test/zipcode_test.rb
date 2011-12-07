@@ -1,6 +1,8 @@
 require 'test/unit'
 require File.join(File.expand_path(File.dirname(__FILE__)), 'test_helper')
 require 'zipcode'
+require 'logging'
+include Logging
 
 class ZipCodeTest < Test::Unit::TestCase
   # This runs before each test method
@@ -26,7 +28,7 @@ class ZipCodeTest < Test::Unit::TestCase
   
   # You can have other supporting methods that the tests use
   def supporting_method
-    puts 'This does nothing'
+    logger.warn 'This does nothing'
   end
   
   # Methods that begin with 'test_' are evaluated by Test/Unit as tests
