@@ -1,0 +1,6 @@
+D, [2012-02-07T13:43:32.141357 #42310] DEBUG -- : Attempting to connect to the development database
+D, [2012-02-07T13:43:32.154253 #42310] DEBUG -- : TRUNCATE TABLE zipcode
+I, [2012-02-07T13:43:32.182051 #42310]  INFO -- : Zipcode table truncated
+I, [2012-02-07T13:43:46.571378 #42310]  INFO -- : 43191 zip codes inserted out of 43204 lines read
+I, [2012-02-07T13:43:46.583503 #42310]  INFO -- : 75019 is Coppell, TX
+I, [2012-02-07T13:43:47.304508 #42310]  INFO -- : Stands4 says the lat/lng is 32.9673410000,-96.9865640000, and our database says it's 32.9673, -96.9866.
