@@ -16,12 +16,12 @@ ENV['SCRIPT_ENV'] ||= 'development'
 
 class FileReader
   
-  def self.option_parser
+  def self.option_parser(args = ARGV)
     opts = OptionParser.new
     opts.on("-t", "--truncate")                   { ZipCode.delete_all }
     opts.on("-l LEVEL", "--level LEVEL", String)  { |level| logger.set_log_level(level) }
     opts.on("-h", "--help")                       { puts opts.to_s; exit }
-    opts.parse(ARGV)
+    opts.parse(args)
   end
   
   def self.read_zipcodes
@@ -47,8 +47,16 @@ end
 
 # Run from the command line
 if __FILE__ == $0
+  # First we want to set the log level if that option is passed in
+  index = ARGV.index('-l')
+  if index
+    level = ARGV[index..index+1]
+    FileReader.option_parser(level)
+    level.each { |arg| ARGV.delete(arg) }
+  end
+
   # Evaluate command-line arguments (if any)
-  FileReader.option_parser
+  FileReader.option_parser(ARGV)
   
   STDOUT.sync = true
 
