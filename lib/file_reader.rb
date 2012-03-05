@@ -9,7 +9,6 @@ $LOAD_PATH << File.join(File.dirname(__FILE__))
 require 'db_base'
 require 'zipcode'
 require 'logging'
-require 'geocode'
 include Logging
 
 ENV['SCRIPT_ENV'] ||= 'development'
@@ -67,7 +66,7 @@ if __FILE__ == $0
   zipcode = ZipCode.find('75019')
   logger.info "#{zipcode.zip} is #{zipcode.city}, #{zipcode.state}"
 
-  geocode = Geocode.reverse_geocode(zipcode.zip)
+  geocode = Stands4Geocoder.reverse_geocode(zipcode.zip, 'tk1902')
   unless geocode.nil?
     logger.info "Stands4 says the lat/lng is #{geocode['latitude']},#{geocode['longitude']}, and our database says it's #{zipcode.latitude}, #{zipcode.longitude}."
   end
